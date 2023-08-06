@@ -2,6 +2,7 @@
 // application;
 const inquirer = require('inquirer');
 const fs = require('fs');
+const { default: Choices } = require('inquirer/lib/objects/choices');
 //TODO:Create an array of questions for user
 // input;
 const questions = [
@@ -53,35 +54,54 @@ const {
 function writeToFile(fileName, data) {}
 
 let init = () => {
-  inquirer
+  const inputs = inquirer
     .prompt([
       {
         type: 'input', // Specify the type of input (text)
         name: 'titleAns', // Assign a name to the user's input
-        message: 'What is the Title of your project?',
+        message: 'What is the Title of your application?',
       },
       {
         type: 'input', // Specify the type of input (text)
         name: 'descriptionAns', // Assign a name to the user's input
-        message: 'Provide a description of the project?',
+        message: 'Provide a description of the application?',
       },
       {
         type: 'input',
-        name: 'motivationAns',
-        message: 'Describe the description of your motivation.',
+        name: 'installationAns',
+        message:
+          'Are there any installation instructions if you, please provide them.',
       },
       {
         type: 'input',
-        name: 'solveAns',
-        message: 'What does the project solve?',
+        name: 'usageInfoAns',
+        message: 'How would a user use your application',
+      },
+      {
+        type: 'input',
+        name: 'contributionAns',
+        message: 'Who were the contributers of this application',
+      },
+      {
+        type: 'input',
+        name: 'testInstAns',
+        message: 'Provide the test instruction',
+      },
+      {
+        type: 'list',
+        message: 'What license is your application covered under',
+        name: 'licenseAns',
+        choices: ['MIT', 'ISC', 'Academic Free License v3.0', 'The Unilecense'],
       },
     ])
     .then((data) => {
-      // Process the user's answers here
-      console.log('Hello,'); // Display the user's name
-      const fileName = `${inquirer.name}`;
-      fs.writeFile(fileName, 'Hello', (err) =>
-        err ? console.log(err) : console.log('Success')
+      const { titleAns, descriptionAns, motivationAns, solveAns } = data;
+      const tableOfContents = `## Table of Contents\n\n -[Project Title](#${title})`;
+      const formattedAns = ` # ${titleAns}\n\n## Description:\n\n${descriptionAns}\n\n## Installation:\n\n${installationAns}\n\n## Usage:\n\n ${contribuationAns}\n\n## Contrabution:\n\n `;
+
+      const fileName = `README.md`;
+      fs.writeFile(fileName, formattedAns + '\n', (err) =>
+        err ? console.log(err) : console.log(titleAns)
       );
     })
     .catch((error) => {
