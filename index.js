@@ -1,69 +1,31 @@
-// TODO:Include packages needed for this
-// application;
 const inquirer = require('inquirer');
 const fs = require('fs');
 const { default: Choices } = require('inquirer/lib/objects/choices');
-//TODO:Create an array of questions for user
-// input;
-const questions = [
-  { title: 'What is the Title of your project?' },
-  {
-    description: 'Provide a description of the project?',
-  },
-  {
-    motivation: 'Provide a descripion of your motivation?',
-  },
-  {
-    solve: 'What does the project solve?',
-  },
-  {
-    installation:
-      'What tools may need to be installed before use of the project?',
-  },
-  {
-    usage: 'How will the user use this application?',
-  },
-  {
-    contribuation: 'Who are the users that contributed to the project?',
-  },
-  {
-    lisence: 'What liscence is the project covered under?',
-  },
-  {
-    githubUser: 'Enter your github username.',
-  },
-  {
-    email: 'Enter your email address.',
-  },
-];
-
-const {
-  title,
-  description,
-  motivation,
-  solve,
-  installation,
-  usage,
-  contribuation,
-  lisence,
-  githubUser,
-  email,
-} = questions;
-
-//TODO:Create a function to write README file
-function writeToFile(fileName, data) {}
 
 let init = () => {
+  const tableOfContentsObj = {
+    title: 'project-Title',
+    description: 'description',
+    installation: 'installation',
+    usage: 'usage',
+    contributions: 'contributions',
+    testInstructions: 'test-instructions',
+    license: 'license',
+    contact: 'contact',
+    gitHubUser: 'git-hub-user',
+    questions: 'questions',
+  };
+
   const inputs = inquirer
     .prompt([
       {
-        type: 'input', // Specify the type of input (text)
-        name: 'titleAns', // Assign a name to the user's input
+        type: 'input',
+        name: 'titleAns',
         message: 'What is the Title of your application?',
       },
       {
-        type: 'input', // Specify the type of input (text)
-        name: 'descriptionAns', // Assign a name to the user's input
+        type: 'input',
+        name: 'descriptionAns',
         message: 'Provide a description of the application?',
       },
       {
@@ -93,20 +55,89 @@ let init = () => {
         name: 'licenseAns',
         choices: ['MIT', 'ISC', 'Academic Free License v3.0', 'The Unilecense'],
       },
+      {
+        type: 'input',
+        message: 'What is your gitHub userName',
+        name: 'gitHubUserAns',
+      },
+      {
+        typ: 'input',
+        message: 'What is your email',
+        name: 'contactAns',
+      },
     ])
     .then((data) => {
-      const { titleAns, descriptionAns, motivationAns, solveAns } = data;
-      const tableOfContents = `## Table of Contents\n\n -[Project Title](#${title})`;
-      const formattedAns = ` # ${titleAns}\n\n## Description:\n\n${descriptionAns}\n\n## Installation:\n\n${installationAns}\n\n## Usage:\n\n ${contribuationAns}\n\n## Contrabution:\n\n `;
+      const {
+        title,
+        description,
+        installation,
+        usage,
+        contributions,
+        testInstructions,
+        license,
+        questions,
+      } = tableOfContentsObj;
+      const {
+        titleAns,
+        descriptionAns,
+        installationAns,
+        testInstAns,
+        contributionAns,
+        licenseAns,
+        usageInfoAns,
+        gitHubUserAns,
+        contactAns,
+      } = data;
 
+      //This function recieves a list of instructions and formats them
+      //into rows
+      function formatString(instructions) {
+        const newParts = [];
+        const parts = instructions.split('/');
+        for (element of parts) {
+          newParts.push(`${element.trim()}/`);
+        }
+
+        const intString = newParts.toString();
+        const removeComme = intString.replace(/,/g, '');
+        const splicing = removeComme.split('/');
+
+        const formatContributions = splicing.join('\n');
+        return formatContributions;
+      }
+
+      //This function recieves the github names and return a
+      //formated string of github links
+      function gitHubFormat(githubName) {
+        const parts = githubName.split('/');
+        const newParts = [];
+        for (element of parts) {
+          newParts.push(
+            `- [@${element.trim()}](https://github.com/${element.trim()})`
+          );
+        }
+        return newParts.join('\n');
+      }
+
+      const allContributes = formatString(contributionAns);
+      const usageInstrustions = formatString(usageInfoAns);
+      const installInstructions = formatString(installationAns);
+      const finalTestInstructions = formatString(testInstAns);
+      const gitFormat = gitHubFormat(gitHubUserAns);
+      const licenseString = `This project is licensed under the ${licenseAns} License. \nYou can find more details in the [LICENSE](LICENSE) file.`;
+
+      //Formating to send the data as a readme
+      const tableOfContents = `Table of Contents\n\n -[Project Title](#${title}) \n -[Lisence](#${license}) \n -[Description](#${description}) \n -[Installation](#${installation}) \n -[Usage](#${usage}) \n -[Contributions](#${contributions}) \n -[Test Instructions](#${testInstructions}) \n -[Questions](#${questions}) `;
+      const formattedAns = `# ${titleAns}\n\n## License\n\n${licenseString}\n\n## Description\n\n${descriptionAns} \n\n## ${tableOfContents}\n\n## Installation\n\n${installInstructions}\n\n## Usage\n\n${usageInstrustions}\n\n## Contributions\n\n${allContributes}\n\n## Test Instructions\n\n${finalTestInstructions}\n\n## Questions\n\n${contactAns}\n\n${gitFormat}`;
       const fileName = `README.md`;
+
       fs.writeFile(fileName, formattedAns + '\n', (err) =>
-        err ? console.log(err) : console.log(titleAns)
+        err ? console.log(err) : console.log()
       );
     })
     .catch((error) => {
       console.error(error);
     });
 };
-//Function call to initialize app
+
 init();
