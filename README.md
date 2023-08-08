@@ -34,7 +34,8 @@ This project is licensed under the MIT License.
 
 ## Preview
 
-![readme-generator](/Users/jamesweah/Desktop/Challange09/potential-enigma/Develop/images/ezgif.com-video-to-gif (2).gif))
+![readme-generator](![ezgif com-video-to-gif (2)](https://github.com/jweah2385/readMe-Generator/assets/134350647/8c2ff7f5-5aa3-4d68-9841-6cbbe4e31004))
+
 
 ## Installation
 
