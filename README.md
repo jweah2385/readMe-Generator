@@ -1,58 +1,51 @@
-# My Project
+# REAMD.md Generater
 
-## License
-
-This project is licensed under the Academic Free License v3.0 License. 
-You can find more details in the [LICENSE](LICENSE) file.
-
-## Description
-
-This is a simple README file for an imaginary application called “My Project” 
+This readme generater allows the user to create a readme just by responding to a series of questions.
 
 ## Table of Contents
 
- -[Project Title](#project-Title) 
- -[Lisence](#license) 
- -[Description](#description) 
- -[Installation](#installation) 
- -[Usage](#usage) 
- -[Contributions](#contributions) 
- -[Test Instructions](#test-instructions) 
- -[Questions](#questions) 
+- [Project Title](#project-title)
+- [Description](#description)
+- [Usage](#usage)
+- [License](#license)
+- [Preview](#preview)
+- [Installation](#installation);
+- [Technologies Used](#technologies-used)
+- [Contact](#contact)
 
-## Installation
+## Description
 
-1. Clone the repository to your local machine.
-2. Navigate to the project directory.
-3. Run `npm install` to install the required dependencies.
-4. Run `npm start` to start the application.
-
+This application uses a inquire npm package to ask the user a series of question in the terminal. Once the user answers all the question a readme will be generated.
 
 ## Usage
 
-"My  App" is a simple web application that allows users to create edit and delete items. To use the application:
-1. Open your web browser and navigate to the provided URL.
-2. Click on the "Add Item" button to create a new item.
-3. Edit or delete existing items using the respective buttons.
+The user must go through the question sequential. Where there are multiple choice questions, the user must choose one. Where there are open input questions the user must fill in the open response. Leaving the space blank will simply leave that portion of teh readme page blank. When putting inputting a list of responses, keep that list of responses on that same question.
+For a new line format line so.
+'input/input' is the indecator for a new line
+'/1. input' is the indecator for a new line with a number
+This output is written like this:1. First line/2. Second line
 
+1. First line
+2. Second line
 
-## Contributions
+## License
 
-This project is maintained by a dedicated group of contributors who have invested their time and effort to make it better. Special thanks to John Doe Jane Smith and Sam Sou for their valuable contributions.
+This project is licensed under the MIT License.
 
+## Preview
 
-## Test Instructions
+![readme-generator](/Users/jamesweah/Desktop/Challange09/potential-enigma/Develop/images/ezgif.com-video-to-gif (2).gif))
 
-To test "My App" follow these steps:
-1. Ensure that the application is running on your local machine.2. Click on the "Test" button located at the top of the page.
-3. The application will run automated tests and display the results.
+## Installation
 
+- Node
+- Inquirer
 
-## Questions
+## Technologies Used
 
-johnDoe522@gmail.com
+1. Javascript
+2. Node
 
-- [@johnDoe522](https://github.com/johnDoe522)
-- [@janeSmith523](https://github.com/janeSmith523)
-- [@samSou32](https://github.com/samSou32)
-- [@](https://github.com/)
+## Contact
+
+jweah@aggies.ncat.edu
