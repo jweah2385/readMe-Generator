@@ -9,7 +9,7 @@ This readme generater allows the user to create a readme just by responding to a
 - [Usage](#usage)
 - [License](#license)
 - [Preview](#preview)
-- [Installation](#installation);
+- [Installation](#installation)
 - [Technologies Used](#technologies-used)
 - [Contact](#contact)
 
